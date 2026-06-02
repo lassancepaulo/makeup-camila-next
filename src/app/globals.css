@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+:root {
+  --coral:        #F07272;
+  --coral-dark:   #D85A5A;
+  --coral-light:  #F9ABAB;
+  --coral-xlight: #FEE8E8;
+  --dark:         #2A1414;
+  --dark-soft:    #3D1E1E;
+  --text:         #4A2B2B;
+  --text-light:   #8A6060;
+  --cream:        #FEE8E8;
+  --cream-light:  #FFF8F8;
+
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans:  'Poppins', system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-coral:        var(--coral);
+  --color-coral-dark:   var(--coral-dark);
+  --color-coral-light:  var(--coral-light);
+  --color-coral-xlight: var(--coral-xlight);
+  --color-dark:         var(--dark);
+  --color-dark-soft:    var(--dark-soft);
+  --color-brand-text:   var(--text);
+  --color-cream:        var(--cream);
+  --color-cream-light:  var(--cream-light);
+
+  --font-serif: var(--font-serif);
+  --font-sans:  var(--font-sans);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text);
+  background: #fff;
+  line-height: 1.7;
+}
+
+.font-serif { font-family: var(--font-serif); }
+
+/* Gradient utilitário */
+.bg-gradient-coral {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+}
+.text-gradient-coral {
+  background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
