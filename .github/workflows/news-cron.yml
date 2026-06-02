@@ -1,0 +1,17 @@
+name: Daily News Fetch
+
+on:
+  schedule:
+    - cron: '0 9 * * *'   # Todo dia às 06:00 BRT (09:00 UTC)
+  workflow_dispatch:        # Permite rodar manualmente
+
+jobs:
+  fetch-news:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch and process news
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            -H "Content-Type: application/json" \
+            https://makeupcamilasoares.com/api/news/fetch
