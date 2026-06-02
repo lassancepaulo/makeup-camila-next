@@ -289,21 +289,184 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── CONTATO / CTA ──────────────────────── */}
-      <section id="contato" className="py-24 bg-[#FFF8F8]">
-        <div className="max-w-4xl mx-auto px-6 text-center">
-          <span className="text-[#F07272] text-sm font-semibold uppercase tracking-widest">Vamos conversar</span>
-          <h2 className="font-serif text-4xl text-[#3D1E1E] mt-2 mb-4">Pronta para se transformar?</h2>
-          <p className="text-[#8A6060] max-w-xl mx-auto mb-10">Agende uma consulta gratuita e vamos criar juntas o look perfeito para o seu momento especial.</p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href={`https://wa.me/${WA}?text=Olá Camila! Quero agendar uma consulta.`}
-              className="inline-flex items-center justify-center gap-3 px-10 py-4 rounded-full font-semibold text-white text-lg bg-[#25D366] hover:bg-[#1EBE5A] transition-colors shadow-lg">
-              💬 Agendar pelo WhatsApp
-            </a>
-            <a href="https://instagram.com/makeupcamilasoares" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full font-semibold text-white bg-gradient-coral hover:opacity-90 transition-opacity">
-              📸 Ver no Instagram
-            </a>
+      {/* ── AGENDAMENTO ────────────────────────── */}
+      <section id="agendamento" className="py-24 bg-[#FFF8F8]">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-14">
+            <span className="text-[#F07272] text-sm font-semibold uppercase tracking-widest">Reserve seu horário</span>
+            <h2 className="font-serif text-4xl text-[#3D1E1E] mt-2">Agende sua consultoria</h2>
+            <p className="text-[#8A6060] mt-3 max-w-xl mx-auto">Escolha o serviço ideal e entre em contato. Confirmação em até 24h via WhatsApp.</p>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-8 items-start">
+            {/* Formulário */}
+            <div className="bg-white rounded-2xl p-8 shadow-sm border border-[#FEE8E8]">
+              {/* Passo 1 — Serviço */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-8 bg-gradient-coral rounded-full flex items-center justify-center text-white text-sm font-bold">1</span>
+                  <h4 className="font-serif text-lg text-[#3D1E1E]">Escolha o serviço</h4>
+                </div>
+                <div className="grid grid-cols-3 gap-2" id="serviceSelector">
+                  {SERVICES.map(s => (
+                    <label key={s.slug} className="cursor-pointer">
+                      <input type="radio" name="servico" value={s.title} className="hidden peer" />
+                      <div className="flex flex-col items-center gap-1.5 p-3 bg-[#FFF8F8] border-2 border-transparent rounded-xl text-center peer-checked:border-[#F07272] peer-checked:bg-[#FEE8E8] transition-all hover:border-[#F9ABAB]">
+                        <span className="text-2xl">{s.icon}</span>
+                        <span className="text-xs font-semibold text-[#3D1E1E]">{s.title}</span>
+                      </div>
+                    </label>
+                  ))}
+                </div>
+              </div>
+
+              {/* Passo 2 — Data */}
+              <div className="mb-8">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-8 bg-gradient-coral rounded-full flex items-center justify-center text-white text-sm font-bold">2</span>
+                  <h4 className="font-serif text-lg text-[#3D1E1E]">Data e horário</h4>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">📅 Data do evento</label>
+                    <input type="date" id="bookDate" className="w-full border-[1.5px] border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm text-[#4A2B2B] focus:outline-none focus:border-[#F07272]" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">⏰ Horário preferido</label>
+                    <select id="bookTime" className="w-full border-[1.5px] border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm text-[#4A2B2B] focus:outline-none focus:border-[#F07272]">
+                      {['08:00','09:00','10:00','11:00','13:00','14:00','15:00','16:00','17:00'].map(t => (
+                        <option key={t} value={t}>{t}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Passo 3 — Dados */}
+              <div className="mb-6">
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="w-8 h-8 bg-gradient-coral rounded-full flex items-center justify-center text-white text-sm font-bold">3</span>
+                  <h4 className="font-serif text-lg text-[#3D1E1E]">Seus dados</h4>
+                </div>
+                <div className="space-y-3">
+                  <div>
+                    <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">👤 Seu nome</label>
+                    <input type="text" id="bookName" placeholder="Como prefere ser chamada?" className="w-full border-[1.5px] border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm text-[#4A2B2B] focus:outline-none focus:border-[#F07272]" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">📱 WhatsApp</label>
+                    <input type="tel" id="bookPhone" placeholder="(11) 99999-9999" className="w-full border-[1.5px] border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm text-[#4A2B2B] focus:outline-none focus:border-[#F07272]" />
+                  </div>
+                  <div>
+                    <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">💬 Observações (opcional)</label>
+                    <textarea id="bookNotes" rows={2} placeholder="Ex: Noiva, 200 convidados, prefere make natural..." className="w-full border-[1.5px] border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm text-[#4A2B2B] focus:outline-none focus:border-[#F07272] resize-none" />
+                  </div>
+                </div>
+              </div>
+
+              <button id="bookBtn" className="w-full py-4 rounded-xl font-bold text-white bg-gradient-coral hover:opacity-90 transition-opacity text-lg">
+                📅 Solicitar agendamento via WhatsApp
+              </button>
+              <p className="text-center text-xs text-[#8A6060] mt-3">Você será redirecionada para o WhatsApp para confirmar</p>
+            </div>
+
+            {/* Informações de confiança */}
+            <div className="space-y-6">
+              {[
+                { icon: '💍', title: 'Especialista em noivas', desc: 'Mais de 300 noivas atendidas. Cada detalhe é pensado para o dia mais especial.' },
+                { icon: '📸', title: 'Make que fotograa', desc: 'Técnicas e produtos específicos para durar horas e fotografar com perfeição.' },
+                { icon: '🏆', title: 'Produto premium', desc: 'Uso exclusivo de marcas internacionais de alta performance.' },
+                { icon: '💬', title: 'Atendimento personalizado', desc: 'Conversa prévia para entender seu estilo e o evento. Sem surpresas.' },
+              ].map(item => (
+                <div key={item.title} className="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm border border-[#FEE8E8]">
+                  <span className="text-3xl">{item.icon}</span>
+                  <div>
+                    <h4 className="font-semibold text-[#3D1E1E] mb-1">{item.title}</h4>
+                    <p className="text-[#8A6060] text-sm">{item.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── CONTATO ────────────────────────────── */}
+      <section id="contato" className="py-24 bg-white">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
+            {/* Info */}
+            <div>
+              <span className="text-[#F07272] text-sm font-semibold uppercase tracking-widest">Fale comigo</span>
+              <h2 className="font-serif text-4xl text-[#3D1E1E] mt-2 mb-4">Entre em contato</h2>
+              <p className="text-[#8A6060] mb-10 text-lg">Estou sempre disponível para conversar sobre o seu projeto de beleza.</p>
+
+              <div className="space-y-4">
+                {[
+                  { icon: '💬', bg: '#25D366', label: 'WhatsApp', sub: 'Respondo em até 2h', href: `https://wa.me/${WA}?text=Olá Camila! Vim pelo site e gostaria de mais informações.` },
+                  { icon: '📸', bg: 'linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888)', label: 'Instagram', sub: '@makeupcamilasoares', href: 'https://instagram.com/makeupcamilasoares' },
+                  { icon: '📧', bg: 'linear-gradient(135deg,#F07272,#D85A5A)', label: 'E-mail', sub: 'contato@makeupcamilasoares.com', href: 'mailto:contato@makeupcamilasoares.com' },
+                  { icon: '📍', bg: 'linear-gradient(135deg,#F07272,#D85A5A)', label: 'Atendimento', sub: 'Domicílio e estúdio próprio', href: '#agendamento' },
+                ].map(item => (
+                  <a key={item.label} href={item.href} target={item.href.startsWith('http') ? '_blank' : undefined}
+                    rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    className="flex items-center gap-4 p-4 rounded-xl hover:bg-[#FFF8F8] border border-transparent hover:border-[#FEE8E8] transition-all group">
+                    <span className="w-12 h-12 rounded-xl flex items-center justify-center text-white text-xl flex-shrink-0"
+                      style={{ background: item.bg }}>{item.icon}</span>
+                    <div>
+                      <p className="font-semibold text-[#3D1E1E] group-hover:text-[#F07272] transition-colors">{item.label}</p>
+                      <p className="text-[#8A6060] text-sm">{item.sub}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Formulário de contato */}
+            <div className="bg-[#FFF8F8] rounded-2xl p-8 border border-[#FEE8E8]">
+              <h3 className="font-serif text-2xl text-[#3D1E1E] mb-6">Envie uma mensagem</h3>
+              <div className="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">Nome</label>
+                  <input type="text" id="contactName" placeholder="Seu nome" className="w-full border border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm bg-white text-[#4A2B2B] focus:outline-none focus:border-[#F07272]" />
+                </div>
+                <div>
+                  <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">WhatsApp</label>
+                  <input type="tel" id="contactPhone" placeholder="(11) 99999-9999" className="w-full border border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm bg-white text-[#4A2B2B] focus:outline-none focus:border-[#F07272]" />
+                </div>
+              </div>
+              <div className="mb-4">
+                <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">Serviço de interesse</label>
+                <select id="contactService" className="w-full border border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm bg-white text-[#4A2B2B] focus:outline-none focus:border-[#F07272]">
+                  <option value="">Selecione...</option>
+                  {SERVICES.map(s => <option key={s.slug} value={s.title}>{s.title}</option>)}
+                </select>
+              </div>
+              <div className="mb-5">
+                <label className="text-xs font-semibold text-[#8A6060] uppercase tracking-wide block mb-1.5">Mensagem</label>
+                <textarea id="contactMsg" rows={4} placeholder="Conta um pouco sobre seu evento..." className="w-full border border-[#FEE8E8] rounded-xl px-3 py-2.5 text-sm bg-white text-[#4A2B2B] focus:outline-none focus:border-[#F07272] resize-none" />
+              </div>
+              <button id="contactBtn"
+                className="w-full py-3.5 rounded-xl font-bold text-white bg-[#25D366] hover:bg-[#1EBE5A] transition-colors text-sm">
+                💬 Enviar via WhatsApp
+              </button>
+              <p className="text-center text-xs text-[#8A6060] mt-2">Resposta garantida em até 2 horas</p>
+            </div>
+          </div>
+
+          {/* Trust badges */}
+          <div className="flex flex-wrap justify-center gap-10 mt-16 pt-10 border-t border-[#FEE8E8]">
+            {[
+              { icon: '🔒', text: 'Pagamento 100% seguro' },
+              { icon: '⭐', text: '500+ clientes satisfeitas' },
+              { icon: '📜', text: 'Profissional certificada' },
+              { icon: '💝', text: 'Atendimento humanizado' },
+            ].map(item => (
+              <div key={item.text} className="flex items-center gap-2 text-[#8A6060] text-sm">
+                <span>{item.icon}</span>
+                <span>{item.text}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -345,6 +508,53 @@ export default async function HomePage() {
         aria-label="WhatsApp">
         💬
       </a>
+
+      {/* ── Agendamento WhatsApp ────────────────── */}
+      <script dangerouslySetInnerHTML={{ __html: `
+        (function(){
+          var btn = document.getElementById('bookBtn');
+          if (!btn) return;
+          btn.addEventListener('click', function(){
+            var servico = document.querySelector('input[name="servico"]:checked');
+            var data    = document.getElementById('bookDate').value;
+            var hora    = document.getElementById('bookTime').value;
+            var nome    = document.getElementById('bookName').value.trim();
+            var tel     = document.getElementById('bookPhone').value.trim();
+            var obs     = document.getElementById('bookNotes').value.trim();
+            if (!servico) { alert('Por favor, selecione um serviço.'); return; }
+            if (!nome)    { alert('Por favor, informe seu nome.'); return; }
+            var msg = 'Olá Camila! Gostaria de agendar um horário.\\n\\n'
+              + '✨ Serviço: ' + servico.value + '\\n'
+              + (data ? '📅 Data: ' + data + '\\n' : '')
+              + '⏰ Horário preferido: ' + hora + '\\n'
+              + '👤 Nome: ' + nome + '\\n'
+              + (tel ? '📱 WhatsApp: ' + tel + '\\n' : '')
+              + (obs ? '💬 Observações: ' + obs : '');
+            window.open('https://wa.me/${WA}?text=' + encodeURIComponent(msg), '_blank');
+          });
+        })();
+      `}} />
+
+      {/* ── Contato WhatsApp ────────────────────── */}
+      <script dangerouslySetInnerHTML={{ __html: `
+        (function(){
+          var btn = document.getElementById('contactBtn');
+          if (!btn) return;
+          btn.addEventListener('click', function(){
+            var nome    = document.getElementById('contactName').value.trim();
+            var tel     = document.getElementById('contactPhone').value.trim();
+            var servico = document.getElementById('contactService').value;
+            var msg     = document.getElementById('contactMsg').value.trim();
+            if (!nome) { alert('Por favor, informe seu nome.'); return; }
+            var texto = 'Olá Camila! Vim pelo site e gostaria de mais informações.\\n\\n'
+              + '👤 Nome: ' + nome + '\\n'
+              + (tel ? '📱 WhatsApp: ' + tel + '\\n' : '')
+              + (servico ? '✨ Serviço: ' + servico + '\\n' : '')
+              + (msg ? '💬 Mensagem: ' + msg : '');
+            window.open('https://wa.me/${WA}?text=' + encodeURIComponent(texto), '_blank');
+          });
+        })();
+      `}} />
 
       {/* ── Navbar scroll script ────────────────── */}
       <script dangerouslySetInnerHTML={{ __html: `
