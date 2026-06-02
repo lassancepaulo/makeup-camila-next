@@ -62,9 +62,9 @@ export default async function HomePage() {
       {/* ── NAVBAR ─────────────────────────────── */}
       <nav id="navbar" className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-5 bg-transparent" style={{ '--navbar-scrolled': '0' } as React.CSSProperties}>
         <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
-          <Link href="/" className="relative" style={{ height: 128 }}>
-            <img src="/assets/logo-brand-white.png" alt="Makeup Camila Soares" className="nav-logo-light absolute top-0 left-0" style={{ height: 128, width: 'auto' }} />
-            <img src="/assets/logo-black.png"       alt="Makeup Camila Soares" className="nav-logo-dark  absolute top-0 left-0 opacity-0" style={{ height: 128, width: 'auto' }} />
+          <Link href="/" className="block relative" style={{ height: 128 }}>
+            <img src="/assets/logo-brand-white.png" alt="Makeup Camila Soares" className="nav-logo-light block transition-opacity duration-300" style={{ height: 128, width: 'auto' }} />
+            <img src="/assets/logo-black.png"       alt="Makeup Camila Soares" className="nav-logo-dark  block transition-opacity duration-300 opacity-0 absolute top-0 left-0" style={{ height: 128, width: 'auto' }} />
           </Link>
           <ul className="hidden md:flex items-center gap-2">
             {[['#sobre','Sobre'],['#servicos','Serviços'],['#portfolio','Portfólio'],['#depoimentos','Depoimentos'],].map(([href,label])=>(
